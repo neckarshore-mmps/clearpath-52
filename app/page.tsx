@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useRef, useEffect } from "react";
 import { analyzeDecision, type AnalysisResult } from "./actions";
 import { BiasCard } from "@/components/BiasCard";
 import { VetoTimer } from "@/components/VetoTimer";
@@ -8,7 +8,7 @@ import { VetoTimer } from "@/components/VetoTimer";
 type View =
   | { kind: "input" }
   | { kind: "analyzing" }
-  | { kind: "veto"; result: AnalysisResult }
+  | { kind: "veto"; result: AnalysisResult; decisionAtSubmit: string }
   | { kind: "error"; message: string };
 
 const VETO_SECONDS = 60;
@@ -18,18 +18,28 @@ export default function Home() {
   const [decision, setDecision] = useState("");
   const [timerDone, setTimerDone] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-focus the textarea when we return to the input view.
+  useEffect(() => {
+    if (view.kind === "input") {
+      textareaRef.current?.focus();
+    }
+  }, [view.kind]);
 
   function submit() {
-    if (decision.trim().length < 10) return;
+    const text = decision.trim();
+    if (text.length < 10) return;
+    const submittedDecision = decision;
     setView({ kind: "analyzing" });
     setTimerDone(false);
     startTransition(async () => {
-      const r = await analyzeDecision(decision);
+      const r = await analyzeDecision(submittedDecision);
       if (!r.ok) {
         setView({ kind: "error", message: r.error });
         return;
       }
-      setView({ kind: "veto", result: r });
+      setView({ kind: "veto", result: r, decisionAtSubmit: submittedDecision });
     });
   }
 
@@ -37,6 +47,20 @@ export default function Home() {
     setView({ kind: "input" });
     setDecision("");
     setTimerDone(false);
+  }
+
+  function backToInputKeepText() {
+    // Preserve the user's typed decision so they can edit + retry.
+    setView({ kind: "input" });
+    setTimerDone(false);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    // Cmd+Enter (mac) or Ctrl+Enter (windows/linux) submits.
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+      e.preventDefault();
+      submit();
+    }
   }
 
   return (
@@ -67,17 +91,23 @@ export default function Home() {
               What decision are you considering right now?
             </label>
             <textarea
+              ref={textareaRef}
               id="decision"
               value={decision}
               onChange={(e) => setDecision(e.target.value)}
+              onKeyDown={handleKeyDown}
               rows={6}
               placeholder="e.g. I want to invest 50k in a friend's startup that has tripled in valuation over the last six months..."
               className="w-full p-4 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
               maxLength={4000}
+              autoFocus
             />
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-4">
               <span className="text-xs text-zinc-400 tabular-nums">
                 {decision.length}/4000
+                <span className="hidden sm:inline ml-3 text-zinc-500">
+                  ⌘+↵ to submit
+                </span>
               </span>
               <button
                 type="button"
@@ -108,13 +138,22 @@ export default function Home() {
             <p className="text-sm text-red-800 dark:text-red-300 mb-4">
               {view.message}
             </p>
-            <button
-              type="button"
-              onClick={reset}
-              className="text-sm font-medium text-red-900 dark:text-red-200 underline"
-            >
-              Try again
-            </button>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={backToInputKeepText}
+                className="text-sm font-medium px-4 py-2 bg-red-900 dark:bg-red-200 text-red-50 dark:text-red-900 rounded-md hover:opacity-90"
+              >
+                Edit and retry
+              </button>
+              <button
+                type="button"
+                onClick={reset}
+                className="text-sm font-medium px-4 py-2 border border-red-300 dark:border-red-800 text-red-900 dark:text-red-200 rounded-md hover:bg-red-100 dark:hover:bg-red-950/50"
+              >
+                Start over
+              </button>
+            </div>
           </div>
         )}
 
@@ -125,7 +164,7 @@ export default function Home() {
                 Your decision
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 italic">
-                &ldquo;{decision}&rdquo;
+                &ldquo;{view.decisionAtSubmit}&rdquo;
               </p>
             </div>
 
