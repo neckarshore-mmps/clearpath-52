@@ -1,0 +1,110 @@
+[
+  {
+    "id": "confirmation-bias",
+    "name": "Confirmation Bias",
+    "summary": "The tendency to seek, interpret, and remember information that confirms what you already believe — while discounting evidence to the contrary.",
+    "example": "An investor who is bullish on a stock only reads articles supporting the buy thesis, and dismisses bearish analysis as 'noise'."
+  },
+  {
+    "id": "sunk-cost-fallacy",
+    "name": "Sunk Cost Fallacy",
+    "summary": "The tendency to keep investing in a decision because of past investment, even when future costs outweigh future benefits.",
+    "example": "Continuing to pour money into a failing project because you've 'already spent so much' on it."
+  },
+  {
+    "id": "anchoring-bias",
+    "name": "Anchoring Bias",
+    "summary": "Over-reliance on the first piece of information offered (the 'anchor') when making subsequent judgments.",
+    "example": "A first salary offer of 80k anchors the negotiation, even though comparable roles pay 110k."
+  },
+  {
+    "id": "availability-heuristic",
+    "name": "Availability Heuristic",
+    "summary": "Judging the probability of events by how easily examples come to mind, rather than by actual frequency.",
+    "example": "Fearing plane crashes more than car accidents because plane crashes are vivid in the news, despite cars being statistically more dangerous."
+  },
+  {
+    "id": "survivorship-bias",
+    "name": "Survivorship Bias",
+    "summary": "Focusing on the people or things that 'survived' a process and ignoring those that didn't, leading to false conclusions.",
+    "example": "Studying only successful startups to learn 'what works', ignoring the thousands that did the same things and failed."
+  },
+  {
+    "id": "loss-aversion",
+    "name": "Loss Aversion",
+    "summary": "The tendency to prefer avoiding losses over acquiring equivalent gains — losing 100 hurts about twice as much as gaining 100 feels good.",
+    "example": "Holding a losing stock too long to 'avoid realizing the loss', while quickly selling winners."
+  },
+  {
+    "id": "hindsight-bias",
+    "name": "Hindsight Bias",
+    "summary": "The 'I-knew-it-all-along' effect — perceiving past events as having been more predictable than they actually were.",
+    "example": "After a startup fails, claiming 'it was obvious from the beginning' — even though you invested in it."
+  },
+  {
+    "id": "overconfidence-effect",
+    "name": "Overconfidence Effect",
+    "summary": "Excessive confidence in one's own answers, abilities, or predictions, beyond what evidence justifies.",
+    "example": "Claiming '90% confidence' in a forecast that, calibrated against history, deserves at most 60%."
+  },
+  {
+    "id": "authority-bias",
+    "name": "Authority Bias",
+    "summary": "The tendency to attribute greater accuracy and weight to the opinion of an authority figure, independent of its actual content.",
+    "example": "Following a famous CEO's strategic advice without checking if it actually applies to your context."
+  },
+  {
+    "id": "social-proof",
+    "name": "Social Proof",
+    "summary": "Doing something because many others are doing it, treating popularity as evidence of correctness.",
+    "example": "Buying a stock because it's trending on social media, not because the fundamentals support it."
+  },
+  {
+    "id": "halo-effect",
+    "name": "Halo Effect",
+    "summary": "A single positive trait (attractiveness, eloquence, fame) bleeds over and biases the evaluation of unrelated qualities.",
+    "example": "Assuming a charismatic founder is also a competent operator, without checking execution track record."
+  },
+  {
+    "id": "action-bias",
+    "name": "Action Bias",
+    "summary": "The urge to act — to 'do something' — even when waiting or doing nothing would lead to a better outcome.",
+    "example": "A goalkeeper diving left or right on penalties even though statistically staying in the center saves more goals."
+  },
+  {
+    "id": "endowment-effect",
+    "name": "Endowment Effect",
+    "summary": "Valuing something more highly simply because you own it, beyond its market value.",
+    "example": "Refusing to sell a car for its fair market price because 'it's worth more to me' — without a concrete reason."
+  },
+  {
+    "id": "recency-bias",
+    "name": "Recency Bias",
+    "summary": "Over-weighting recent events and under-weighting older data when making predictions or decisions.",
+    "example": "Assuming a stock will keep going up because it has rallied for three months, ignoring its 10-year volatility."
+  },
+  {
+    "id": "status-quo-bias",
+    "name": "Status Quo Bias",
+    "summary": "A preference for the current state of affairs — change is perceived as loss, even when change would be objectively better.",
+    "example": "Sticking with an underperforming vendor 'because switching is too risky', without quantifying the risk."
+  },
+  {
+    "id": "planning-fallacy",
+    "name": "Planning Fallacy",
+    "summary": "Systematically underestimating the time, cost, and risk of future projects while overestimating the benefits.",
+    "example": "Promising to ship a feature in two weeks when comparable past projects have always taken six."
+  },
+  {
+    "id": "dunning-kruger-effect",
+    "name": "Dunning-Kruger Effect",
+    "summary": "People with limited knowledge in a domain often overestimate their competence; experts often underestimate theirs.",
+    "example": "After reading two articles on machine learning, confidently telling a researcher their model is 'wrong'."
+  },
+  {
+    "id": "bandwagon-effect",
+    "name": "Bandwagon Effect",
+    "summary": "Adopting beliefs or behaviors because many others have — independent of underlying evidence.",
+    "example": "Joining a startup 'because everyone in the network is moving into AI', without evaluating fit."
+  }
+]
