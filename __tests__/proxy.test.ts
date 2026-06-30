@@ -18,7 +18,7 @@
  *   5. Two proxy() invocations produce distinct nonces (per-request freshness)
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, afterEach } from 'vitest'
 import { NextRequest } from 'next/server'
 import { proxy, buildCsp } from '../proxy'
 
@@ -48,7 +48,7 @@ describe('proxy CSP — S1 acceptance gate', () => {
   })
 
   // ── Test 1: real proxy() sets CSP on the response ─────────────────────────
-  it('sets Content-Security-Policy on the response', async () => {
+  it('sets Content-Security-Policy on the response', () => {
     const request = new NextRequest('http://localhost:3000/')
     const response = proxy(request)
     const csp = response.headers.get('content-security-policy')
@@ -57,7 +57,7 @@ describe('proxy CSP — S1 acceptance gate', () => {
   })
 
   // ── Test 2: x-nonce wiring on the forwarded request ───────────────────────
-  it('sets x-nonce on the forwarded request headers', async () => {
+  it('sets x-nonce on the forwarded request headers', () => {
     const request = new NextRequest('http://localhost:3000/')
     const response = proxy(request)
     // Next.js internally mirrors forwarded request headers onto the response
@@ -91,6 +91,7 @@ describe('proxy CSP — S1 acceptance gate', () => {
 
     expect(directives.get('object-src')).toEqual(["'none'"])
     expect(directives.get('base-uri')).toEqual(["'self'"])
+    expect(directives.get('form-action')).toEqual(["'self'"])
     expect(directives.get('frame-ancestors')).toEqual(["'none'"])
     // connect-src must be exactly 'self' in prod (browser never calls LLM
     // providers — the server proxy does).
